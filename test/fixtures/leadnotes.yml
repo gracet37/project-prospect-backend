@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  comments: MyString
+  status: MyString
+  next_steps: MyString
+  lead: one
+  user: one
+
+two:
+  comments: MyString
+  status: MyString
+  next_steps: MyString
+  lead: two
+  user: two
