@@ -10,46 +10,59 @@ API_KEY = ENV["YELP_API_KEY"]
 DEFAULT_BUSINESS_ID = "yelp-san-francisco"
 DEFAULT_TERM = "dinner"
 DEFAULT_LOCATION = "New York, NY"
-SEARCH_LIMIT = 10
+SEARCH_LIMIT = 20
 
 # Original Source: https://github.com/Yelp/yelp-fusion/tree/master/fusion/ruby
 
 class YelpApiAdapter
     # #Returns a parsed json object of the request
   
-    def self.search(term, location="chicago")
+    # def self.search(term, location="chicago")
+    #   url = "#{API_HOST}#{SEARCH_PATH}"
+    #   params = {
+    #     term: term,
+    #     location: location,
+    #     limit: SEARCH_LIMIT
+    #   }
+    #   response = HTTP.auth("Bearer #{API_KEY}").get(url, params: params)
+    #   p "*******************************************"
+    #   p response
+    #   response.parse["businesses"]
+    # end
+  
+    # def self.business_reviews(business_id)
+    #   url = "#{API_HOST}#{BUSINESS_PATH}#{business_id}/reviews"
+    #   response = HTTP.auth("Bearer #{API_KEY}").get(url)
+    #   response.parse["reviews"]
+    # end
+    
+    # def business(business_id)
+    #   url = "#{API_HOST}#{BUSINESS_PATH}#{business_id}"
+    #   response = HTTP.auth("Bearer #{API_KEY}").get(url)
+    #   response.parse
+    # end
+
+    # def self.categories
+    #   url = "#{API_HOST}#{CATEGORY_PATH}"
+    #   response = HTTP.auth("Bearer #{API_KEY}").get(url)
+    #   p response
+
+    #   response.parse["categories"]
+    # end
+    
+
+    def self.category_search(categories, location="chicago")
       url = "#{API_HOST}#{SEARCH_PATH}"
       params = {
-        term: term,
+        categories: categories,
         location: location,
         limit: SEARCH_LIMIT
       }
       response = HTTP.auth("Bearer #{API_KEY}").get(url, params: params)
-      p "*******************************************"
-      p response
+      # p "*******************************************"
+      # p response
       response.parse["businesses"]
     end
-  
-    def self.business_reviews(business_id)
-      url = "#{API_HOST}#{BUSINESS_PATH}#{business_id}/reviews"
-      response = HTTP.auth("Bearer #{API_KEY}").get(url)
-      response.parse["reviews"]
-    end
-    
-    def business(business_id)
-      url = "#{API_HOST}#{BUSINESS_PATH}#{business_id}"
-      response = HTTP.auth("Bearer #{API_KEY}").get(url)
-      response.parse
-    end
-
-    def self.categories
-      url = "#{API_HOST}#{CATEGORY_PATH}"
-      response = HTTP.auth("Bearer #{API_KEY}").get(url)
-      p response
-
-      response.parse["categories"]
-    end
-    
   end
 
-# p YelpApiAdapter.categories
+p YelpApiAdapter.category_search("advertising", "chicago")
