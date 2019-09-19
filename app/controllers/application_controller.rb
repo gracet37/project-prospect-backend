@@ -2,14 +2,14 @@ class ApplicationController < ActionController::API
   # before_action :authorized
 
   # def encode_token(payload)
-  #   JWT.encode(payload, 'philz_greece')
+  #   JWT.encode(payload, 'grac3sAPP')
   # end 
 
   # def decoded_token
   #   if auth_header
   #     token = auth_header.split(' ')[1]
   #     begin
-  #       JWT.decode(token, 'philz_greece', true, algorithm: 'HS256')
+  #       JWT.decode(token, 'grac3sAPP', true, algorithm: 'HS256')
   #     rescue JWT::DecodeError
   #       nil 
   #     end
@@ -18,9 +18,9 @@ class ApplicationController < ActionController::API
 
   # def custom_decode(token)
   #   begin
-  #     JWT.decode(token, 'philz_greece', true, algorithm: 'HS256')
+  #     JWT.decode(token, 'grac3sAPP', true, algorithm: 'HS256')
   #   rescue JWT::DecodeError
-  #     p "Decode Error Bruh"
+  #     p "Decode Error"
   #     nil
   #   end
   # end
