@@ -4,6 +4,7 @@ require "http"
 API_HOST = "https://api.yelp.com"
 SEARCH_PATH = "/v3/businesses/search"
 BUSINESS_PATH = "/v3/businesses/"  # trailing / because we append the business id to the path
+CATEGORY_PATH = "/v3/categories"
 API_KEY = ENV["YELP_API_KEY"]
 
 DEFAULT_BUSINESS_ID = "yelp-san-francisco"
@@ -40,7 +41,15 @@ class YelpApiAdapter
       response = HTTP.auth("Bearer #{API_KEY}").get(url)
       response.parse
     end
+
+    def self.categories
+      url = "#{API_HOST}#{CATEGORY_PATH}"
+      response = HTTP.auth("Bearer #{API_KEY}").get(url)
+      p response
+
+      response.parse["categories"]
+    end
     
   end
 
-# p YelpApiAdapter.search("japanese", "chicago")
+# p YelpApiAdapter.categories
