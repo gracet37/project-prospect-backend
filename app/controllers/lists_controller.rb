@@ -5,14 +5,28 @@
 # A user can delete a list
 # A user can create a list 
 
-
 class ListsController < ApplicationController
-  def index
+
+  def create
+    @list = List.where(:name params[:name], user_id: current_user.id).first_or_create
+    if @list 
+      render json: @list
+    else 
+      render json: {errors: @list.errors.full_messages}
   end
 
-  def create 
+  def show 
+    if logged_in? 
+      @list = List.find_by(user_id: current_user.id)
+      render json: @list
+    else 
+      render json: {errors: "No list found with that user id"}
   end
 
   def destroy 
+    @list = List.find_by(id: params[:id])
+    @list.destroy 
+    render json: {message: "list deleted"}
   end
+
 end 
