@@ -7,20 +7,27 @@
 
 class ListsController < ApplicationController
 
+  def index 
+    list = List.all 
+    render json: list
+  end
+
   def create
-    @list = List.where(:name params[:name], user_id: current_user.id).first_or_create
+    @list = List.where(name: params[:name], user_id: current_user.id).first_or_create
     if @list 
-      render json: @list
+      render json: @list, include: [:leads]
     else 
       render json: {errors: @list.errors.full_messages}
+    end
   end
 
   def show 
     if logged_in? 
       @list = List.find_by(user_id: current_user.id)
-      render json: @list
+      render json: @list, include: [:leads]
     else 
       render json: {errors: "No list found with that user id"}
+    end
   end
 
   def destroy 

@@ -17654,10 +17654,10 @@ yelp_data = [
 one = User.create!(first_name: "Sarah", last_name: "May", email: "sarahmay@email.com", password: "123456", img_url: "https://randomuser.me/api/portraits/women/47.jpg")
 two = User.create!(first_name: "Robert", last_name: "Hashket", email: "roberthashket@email.com", password: "123456", img_url: "https://tinyfac.es/data/avatars/E0B4CAB3-F491-4322-BEF2-208B46748D4A-200w.jpeg")
 
-# listone = List.create!(name: "Salesforce leads", user_id: 11)
-# listtwo = List.create!(name: "Google leads", user_id: 11)
-# listthree = List.create!(name: "Google leads", user_id: 12)
-# listfour = List.create!(name: "Haribo leads", user_id: 12)
+listone = List.create!(name: "Salesforce leads", user: one)
+listtwo = List.create!(name: "Google leads", user: one)
+listthree = List.create!(name: "Google leads", user: two)
+listfour = List.create!(name: "Haribo leads", user: two)
 
 100.times do 
   Lead.create(
