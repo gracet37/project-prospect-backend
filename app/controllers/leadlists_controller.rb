@@ -12,7 +12,17 @@ class LeadlistsController < ApplicationController
   end
 
   def show 
-    
+
+  end
+
+  def destroy 
+    leadlist = Leadlist.where()
+  end
+
+  private 
+
+  def find_leadlist
+
   end
 
 end 

@@ -12,7 +12,7 @@ API_KEY = ENV["YELP_API_KEY"]
 DEFAULT_LOCATION = "New York, NY"
 SEARCH_LIMIT = 20
 
-# Original Source: https://github.com/Yelp/yelp-fusion/tree/master/fusion/ruby
+# # Original Source: https://github.com/Yelp/yelp-fusion/tree/master/fusion/ruby
 
 class YelpApiAdapter
 
@@ -28,9 +28,9 @@ class YelpApiAdapter
       # p response
       response.parse["businesses"]
     end
-  end
+end
 
-p YelpApiAdapter.category_search("advertising", "chicago")
+# p YelpApiAdapter.category_search("advertising", "chicago")
 
     # #Returns a parsed json object of the request
   
