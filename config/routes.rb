@@ -9,6 +9,11 @@ namespace :api do
   namespace :v1 do
     resources :categories
     resources :leads
+    resources :lists
+    post '/auth', to: 'auth#create'
+    post '/login', to: 'auth#login'
+    get '/current_user', to: 'auth#show'
+    resources :leadlists
   end
 end
 # get '/search', to: 'leads#search'
