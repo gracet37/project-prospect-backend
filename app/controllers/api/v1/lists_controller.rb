@@ -35,8 +35,8 @@ module Api
         # id = decoded_token.first['id']
         # p id
         p params
-        user = User.find(id)
-       list = List.new(name: params[:name], user_id: id)
+        # user = User.find(id)
+       list = List.new(name: params[:name], user_id: params[:user_id])
         if list.save 
           render json: list
         else 
