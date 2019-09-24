@@ -27,10 +27,16 @@ module Api
 
       def create
         p "*************** LIST CREATE **************" 
-        p current_user
-        # p params 
-        p logged_in?
-       list = List.new(name: params[:name], user_id: params[:user_id])
+        # p current_user
+        # token = request.headers[:Authorization].split(' ')[1]
+        # p token
+        # decoded_token = JWT.decode(token, 'app_secret', true, { algorithm: 'HS256' })
+    
+        # id = decoded_token.first['id']
+        # p id
+        p params
+        user = User.find(id)
+       list = List.new(name: params[:name], user_id: id)
         if list.save 
           render json: list
         else 
