@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   private
 
   def find_user 
-    @user = User.find(current_user.id)
+    @user = User.find(17)
   end
 
   # def user_params
