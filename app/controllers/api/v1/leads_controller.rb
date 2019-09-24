@@ -9,6 +9,7 @@ module Api
       end
 
       def create 
+        p "******************* CREATE LEADS ********************"
         p params 
         @lead = Lead.new(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], phone_number: params[:phone_number], position: params[:position], confidence_score: params[:confidence_score], company: params[:company], website: params[:website])
         if @lead.save 
