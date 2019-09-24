@@ -14,17 +14,37 @@ module Api
         render json: list
       end
 
+      # def create
+      #   p "lists ****************************"
+      #   p params
+      #   @list = List.where(name: params[:name], user_id: user_id).first_or_create
+      #   if @list 
+      #     render json: @list, include: [:leads]
+      #   else 
+      #     render json: {errors: @list.errors.full_messages}
+      #   end
+      # end
+
       def create
-        @list = List.where(name: params[:name], user_id: current_user.id).first_or_create
-        if @list 
-          render json: @list, include: [:leads]
+        p "*************** LIST CREATE **************" 
+        p current_user
+        # p params 
+        p logged_in?
+       list = List.new(name: params[:name], user_id: params[:user_id])
+        if list.save 
+          render json: list
         else 
-          render json: {errors: @list.errors.full_messages}
+          render json: {errors: list.errors.full_messages}
         end
       end
 
       def show 
         if logged_in? 
+        # p " auth header"
+        # p auth_header
+        # token = params[:token]
+        # p "** token **"
+        # p token
           @list = List.find_by(user_id: current_user.id)
           render json: @list, include: [:leads]
         else 
