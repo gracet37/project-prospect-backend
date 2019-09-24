@@ -1,19 +1,38 @@
 class Api::V1::AuthController < ApplicationController
 
-  def create
-    p '=-========================================='
 
-    user = User.new(username: params[:auth][:username], password: params[:auth][:username])
+# CREATE NEW USER
+
+def create
+    p '========================================'
+
+    user = User.new(first_name: params[:auth][:firstName], last_name: params[:auth][:lastName], email: params[:auth][:email], password: params[:auth][:password])
     p user
     if user.save
       token = JWT.encode({id: user.id}, 'app_secret', 'HS256')
-      render json: { id: user.id, username: user.username, token: token}
+      # render json: { id: user.id, first_name: user.first_name, last_name: user.last_name, email: user.email, token: token}
+            render json: { user: user, token: token}
     else
       render json: { error: 'Not Authorized'}, status: 401
     end
-  end
+end
+
+def login 
+    p "******LOGIN********"
+    @user = User.find_by(email: params[:email])
+    if @user && @user.authenticate(params[:password])
+      token = JWT.encode({id: @user.id}, 'app_secret', 'HS256')
+      render json: {user: @user, token: token}, status: :accepted
+    else 
+      render json: {message: 'Invalid username or password'}, status: :unauthorized
+    end
+
+end 
 
 
+
+
+# CHECK IF USER LOGGED IN AND GET CURRENT USER DATA
 
   def show
     p "******************CURRENT USER *******************"
@@ -26,7 +45,7 @@ class Api::V1::AuthController < ApplicationController
     p id
     user = User.find(id)
     if user
-      render json: { id: user.id, username: user.username, token: token }
+      render json: { user: user, token: token }
     else
       render json: { error: 'Not Authorized'}, status: 401
     end

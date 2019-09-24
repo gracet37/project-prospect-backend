@@ -13,7 +13,7 @@ namespace :api do
     post '/lists', to: 'lists#create'
     post '/auth', to: 'auth#create'
     post '/login', to: 'auth#login'
-    post '/current_user', to: 'auth#show'
+    get '/current_user', to: 'auth#show'
     resources :leadlists
   end
 end
