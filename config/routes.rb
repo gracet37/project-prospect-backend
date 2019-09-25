@@ -9,7 +9,7 @@ namespace :api do
   namespace :v1 do
     resources :categories
     resources :leads
-    # resources :lists
+    resources :lists
     post '/lists', to: 'lists#create'
     post '/auth', to: 'auth#create'
     post '/login', to: 'auth#login'
