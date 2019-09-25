@@ -11,6 +11,7 @@ namespace :api do
     resources :leads
     resources :lists
     post '/lists', to: 'lists#create'
+    post '/lists/:id', to: 'lists#show'
     post '/auth', to: 'auth#create'
     post '/login', to: 'auth#login'
     get '/current_user', to: 'auth#show'

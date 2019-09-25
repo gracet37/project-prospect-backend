@@ -45,13 +45,14 @@ module Api
       end
 
       def show 
-        if logged_in? 
-        # p " auth header"
-        # p auth_header
-        # token = params[:token]
-        # p "** token **"
-        # p token
-          @list = List.find_by(user_id: current_user.id)
+        # if logged_in? 
+        # # p " auth header"
+        # # p auth_header
+        # # token = params[:token]
+        # # p "** token **"
+        # # p token
+        @list = List.where(user_id: params[:user_id])
+        if @list
           render json: @list, include: [:leads]
         else 
           render json: {errors: "No list found with that user id"}
