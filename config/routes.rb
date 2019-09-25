@@ -15,6 +15,7 @@ namespace :api do
     post '/auth', to: 'auth#create'
     post '/login', to: 'auth#login'
     get '/current_user', to: 'auth#show'
+    # delete '/delete', to '/'
     resources :leadlists
   end
 end
