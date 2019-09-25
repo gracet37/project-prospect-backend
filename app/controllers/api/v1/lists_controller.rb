@@ -60,9 +60,11 @@ module Api
       end
 
       def destroy 
-        @list = List.find_by(id: params[:id])
-        @list.destroy 
-        render json: {message: "list deleted"}
+        p "******************** DELETE LIST ********************"
+        p params
+        list = List.find_by(id: params[:id])
+        list.destroy 
+        render json: {list: list, message: "list deleted"}
       end
     end 
  end
