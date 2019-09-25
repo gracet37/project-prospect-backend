@@ -1,7 +1,6 @@
 class CreateLeadnotes < ActiveRecord::Migration[5.2]
   def change
     create_table :leadnotes do |t|
-      t.string :comments
       t.string :status
       t.string :next_steps
       t.references :lead, foreign_key: true
