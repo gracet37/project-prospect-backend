@@ -5,12 +5,12 @@ class LeadnotesController < ApplicationController
 
   def create 
    p params
-  #  leadnote = Leadnote.new(status: params[:status], next_steps: paramsuser_id: params[:user_id])
-    # if leadnote.save 
-    #   render json: leadnote, include: [:leads]
-    # else 
-    #   render json: {errors: leadnote.errors.full_messages}
-    # end
+  #  leadnote = Leadnote.new(status: params[:status], next_steps: params[user_id: params[:user_id])
+  #   if leadnote.save 
+  #     render json: leadnote, include: [:leads]
+  #   else 
+  #     render json: {errors: leadnote.errors.full_messages}
+  #   end
   end
 
   def show 
