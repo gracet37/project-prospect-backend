@@ -51,11 +51,20 @@ module Api
         # # token = params[:token]
         # # p "** token **"
         # # p token
-        @list = List.where(user_id: params[:user_id])
+        @list = List.where(user_id: params[:id])
         if @list
           render json: @list, include: [:leads]
         else 
           render json: {errors: "No list found with that user id"}
+        end
+      end
+
+      def show_by_id
+        @list = List.find(params[:id])
+        if @list
+          render json: @list, include: [:leads]
+        else 
+          render json: {errors: "No list found with that id"}
         end
       end
 

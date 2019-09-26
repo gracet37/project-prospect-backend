@@ -5,13 +5,13 @@ module Api
       
       def index
         @leadlists = Leadlist.all
-        render json: @leadlists 
+        render json: @leadlists
       end
 
       def create 
         @leadlist = Leadlist.where(list_id: params[:list_id], lead_id: params[:lead_id]).first_or_create
         if @leadlist
-          render json: @leadlist 
+          render json: @leadlist
         else 
           render json: {errors: @leadlist.errors.full_messages}
         end
