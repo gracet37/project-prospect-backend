@@ -17672,6 +17672,8 @@ listfour = List.create!(name: "Haribo leads", user: two)
     )
 end
 
+# Leadnote.create(status: "RING", next_steps: "CALL", user: one, lead_id: 146)
+
 # Leadlist.create(lead_id: 1, list_id: listfour.id)
 # Leadlist.create(lead_id: 2, list_id: listfour.id)
 # Leadlist.create(lead_id: 3, list_id: listfour.id)

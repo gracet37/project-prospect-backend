@@ -19,6 +19,8 @@ namespace :api do
     get '/lists/show/:id', to: 'lists#show_by_id'
     # delete '/delete', to '/'
     resources :leadlists
+    delete '/leadlists', to: 'leadlists#destroy'
+    resources :leadnotes
   end
 end
 # get '/search', to: 'leads#search'
