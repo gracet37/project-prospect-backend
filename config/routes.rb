@@ -20,6 +20,8 @@ namespace :api do
     post '/login', to: 'auth#login'
     get '/current_user', to: 'auth#show'
     get '/lists/show/:id', to: 'lists#show_by_id'
+    get '/lists/show_lists/:id', to: 'lists#show_lists'
+    get '/lists/show_special/:id', to: 'lists#show_special'
     # delete '/delete', to '/'
     resources :leadlists
     delete '/leadlists', to: 'leadlists#destroy'

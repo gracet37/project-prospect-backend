@@ -37,36 +37,35 @@ module Api
         # p id
         p params
         # user = User.find(id)
-       list = List.new(name: params[:name], user_id: params[:user_id])
-        if list.save 
-          render json: list
+       @list = List.new(name: params[:name], user_id: params[:user_id])
+        if @list.save 
+          render json: @list
         else 
           render json: {errors: list.errors.full_messages}
         end
       end
 
-      def show 
-        # if logged_in? 
-        # # p " auth header"
-        # # p auth_header
-        # # token = params[:token]
-        # # p "** token **"
-        # # p token
+      def show_lists
+        p "************SHOW LIST ****************"
         @lists = List.where(user_id: params[:id])
         if @lists
-          new_lists = []
-          @lists.each do | list | 
-            list.leads.each do |lead|
+          render json: @lists, include: [:leads]
+        else 
+          render json: {errors: "No list found with that user id"}
+        end
+      end
+
+      def show_special
+        @list = List.find(params[:id])
+        if @list
+          new_list = []
+          # @list.each do | list | 
+            @list.leads.each do |lead|
               lead_with_notes = {:lead => lead}
-              # if lead.leadnotes
-              #   lead_with_notes[:leadnotes] = lead.leadnotes.last
-              # else 
-              new_lists.push(lead_with_notes)
-              # lead[:leadnotes] = lead.leadnotes
+              lead_with_notes[:leadnotes] = lead.leadnotes
+              new_list.push(lead_with_notes)
             end
-          end
-          # binding.pry
-          render json: {lists: @lists, leads: new_lists}
+          render json: {list: @list, leads: new_list}
         else 
           render json: {errors: "No list found with that user id"}
         end
