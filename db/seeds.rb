@@ -17653,6 +17653,7 @@ yelp_data = [
 
 one = User.create!(first_name: "Sarah", last_name: "May", email: "sarahmay@email.com", password: "123456", img_url: "https://randomuser.me/api/portraits/women/47.jpg")
 two = User.create!(first_name: "Robert", last_name: "Hashket", email: "roberthashket@email.com", password: "123456", img_url: "https://tinyfac.es/data/avatars/E0B4CAB3-F491-4322-BEF2-208B46748D4A-200w.jpeg")
+three = User.create!(first_name: "Grace", last_name: "Tan", email: "gracetan@email.com", password: "123456", img_url: "https://media.licdn.com/dms/image/C5103AQHsYRfNxxTwfQ/profile-displayphoto-shrink_200_200/0?e=1574899200&v=beta&t=Dtewxkv0wt52RrnjnVdrrTJ1xCAA6m5pD0rTWyJJxhw")
 
 listone = List.create!(name: "Salesforce leads", user: one)
 listtwo = List.create!(name: "Google leads", user: one)

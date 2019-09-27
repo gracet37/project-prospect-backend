@@ -1,4 +1,5 @@
 # require_relative "./yelp_controller.rb" 
+require 'pry'
 
 # ? USER STORY
 # A user can see a list of all their lists - INDEX 
@@ -11,7 +12,7 @@ module Api
 
       def index 
         list = List.all 
-        render json: list, include: [:leads]
+        render json: list
       end
 
       # def create
@@ -38,7 +39,7 @@ module Api
         # user = User.find(id)
        list = List.new(name: params[:name], user_id: params[:user_id])
         if list.save 
-          render json: list, include: [:leads]
+          render json: list
         else 
           render json: {errors: list.errors.full_messages}
         end
@@ -51,9 +52,21 @@ module Api
         # # token = params[:token]
         # # p "** token **"
         # # p token
-        @list = List.where(user_id: params[:id])
-        if @list
-          render json: @list, include: [:leads]
+        @lists = List.where(user_id: params[:id])
+        if @lists
+          new_lists = []
+          @lists.each do | list | 
+            list.leads.each do |lead|
+              lead_with_notes = {:lead => lead}
+              # if lead.leadnotes
+              #   lead_with_notes[:leadnotes] = lead.leadnotes.last
+              # else 
+              new_lists.push(lead_with_notes)
+              # lead[:leadnotes] = lead.leadnotes
+            end
+          end
+          # binding.pry
+          render json: {lists: @lists, leads: new_lists}
         else 
           render json: {errors: "No list found with that user id"}
         end
