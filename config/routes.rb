@@ -5,6 +5,9 @@ resources :lists
 # resources :leads
 resources :leadlists
 resources :leadnotes
+post '/leadnotes/create', to: 'leadnotes#create'
+get '/leadnotes/:id', to: 'leadnotes#show'
+post '/leadnotes/update', to: 'leadnotes#update'
 
 namespace :api do
   namespace :v1 do
@@ -20,7 +23,11 @@ namespace :api do
     # delete '/delete', to '/'
     resources :leadlists
     delete '/leadlists', to: 'leadlists#destroy'
-    resources :leadnotes
+    # resources :leadnotes
+    post '/leadnotes/create', to: 'leadnotes#new'
+    post '/leadnotes/show', to: 'leadnotes#show'
+
+    resources :comments
   end
 end
 # get '/search', to: 'leads#search'

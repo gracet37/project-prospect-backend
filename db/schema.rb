@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_202530) do
+ActiveRecord::Schema.define(version: 2019_09_18_203247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,14 +19,6 @@ ActiveRecord::Schema.define(version: 2019_09_25_202530) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.string "status"
-    t.bigint "leadnote_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["leadnote_id"], name: "index_comments_on_leadnote_id"
   end
 
   create_table "leadlists", force: :cascade do |t|
@@ -41,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_202530) do
   create_table "leadnotes", force: :cascade do |t|
     t.string "status"
     t.string "next_steps"
+    t.string "comments"
     t.bigint "lead_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -84,7 +77,6 @@ ActiveRecord::Schema.define(version: 2019_09_25_202530) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "comments", "leadnotes"
   add_foreign_key "leadlists", "leads"
   add_foreign_key "leadlists", "lists"
   add_foreign_key "leadnotes", "leads"
