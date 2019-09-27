@@ -7,7 +7,7 @@ class LeadnotesController < ApplicationController
 
   def create 
    p params
-   leadnote = Leadnote.last(status: params[:status], next_steps: params[:next_steps], comments: params[:comments], user_id: params[:user_id], lead_id: params[:lead_id]).first_or_create
+   leadnote = Leadnote.where(status: params[:status], next_steps: params[:next_steps], comments: params[:comments], user_id: params[:user_id], lead_id: params[:lead_id]).first_or_create
     if leadnote.save 
       render json: leadnote
     else 
