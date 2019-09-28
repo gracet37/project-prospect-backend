@@ -71,10 +71,20 @@ module Api
         end
       end
 
-      def show_by_id
-        @list = List.find(params[:id])
-        if @list
-          render json: @list, include: [:leads]
+      def show_special_all
+        @lists = List.where(user_id: params[:id])
+        if @lists
+          # binding.pry
+          new_list = []
+          @lists.each do |list| 
+            list.leads.each do |lead|
+              lead_with_notes = {:lead => lead}
+              lead_with_notes[:list_id] = list.id
+              lead_with_notes[:leadnotes] = lead.leadnotes
+              new_list.push(lead_with_notes)
+            end
+          end
+          render json: {leads_with_notes: new_list}
         else 
           render json: {errors: "No list found with that id"}
         end
