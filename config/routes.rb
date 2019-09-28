@@ -22,6 +22,7 @@ namespace :api do
     get '/lists/show/:id', to: 'lists#show_by_id'
     get '/lists/show_lists/:id', to: 'lists#show_lists'
     get '/lists/show_special/:id', to: 'lists#show_special'
+    get '/lists/show_special_all/:id', to: 'lists#show_special_all'
     # delete '/delete', to '/'
     resources :leadlists
     delete '/leadlists', to: 'leadlists#destroy'
