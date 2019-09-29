@@ -39,9 +39,9 @@ module Api
         # user = User.find(id)
        @list = List.new(name: params[:name], user_id: params[:user_id])
         if @list.save 
-          render json: @list
+          render json: @list, include: [:leads]
         else 
-          render json: {errors: list.errors.full_messages}
+          render json: {errors: @list.errors.full_messages}
         end
       end
 
