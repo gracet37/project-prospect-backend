@@ -39,6 +39,7 @@ module Api
         # user = User.find(id)
        @list = List.new(name: params[:name], user_id: params[:user_id])
         if @list.save 
+          # render json: {list: @list, message: "🎉 List Created!"}, include: [:leads]
           render json: @list, include: [:leads]
         else 
           render json: {errors: @list.errors.full_messages}
@@ -113,9 +114,14 @@ module Api
         p "******************** DELETE LIST ********************"
         p params
         list = List.find_by(id: params[:id])
-        list.destroy 
-        render json: {list: list, message: "list deleted"}
+        if list.destroy 
+          render json: list
+        else 
+          render json: {errors: list.errors.full_messages}
+        end
       end
+
+
     end 
  end
 end
