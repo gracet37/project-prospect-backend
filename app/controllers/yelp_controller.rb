@@ -1,5 +1,5 @@
 require "json"
-require "http"
+# require "http"
 
 API_HOST = "https://api.yelp.com"
 SEARCH_PATH = "/v3/businesses/search"
