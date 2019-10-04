@@ -8,6 +8,7 @@ resources :leadnotes
 post '/leadnotes/create', to: 'leadnotes#create'
 get '/leadnotes/:id', to: 'leadnotes#show'
 post '/leadnotes/update', to: 'leadnotes#update'
+root 'welcome#index'
 
 namespace :api do
   namespace :v1 do
