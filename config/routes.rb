@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :comments
+resources :comments
 resources :users
 resources :lists
 # resources :leads
