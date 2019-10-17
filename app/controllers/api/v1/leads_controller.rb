@@ -22,7 +22,7 @@ module Api
         data = params[:selected]
         lead_array = []
         data.each { |lead| 
-            new_lead = Lead.find_or_create_by(first_name: lead[:name], last_name: lead[:last_name], email: lead[:email], position:lead[:position], confidence_score: lead[:confidence], company: params[:company], website: params[:website])
+            new_lead = Lead.find_or_create_by(first_name: lead[:name], last_name: lead[:last_name], email: lead[:email], position: lead[:position], confidence_score: lead[:confidence], company: params[:company], website: params[:website])
             lead_array.push(new_lead)
         }
         if lead_array
