@@ -33,13 +33,7 @@ module Api
         lead.destroy 
         render json: {lead: lead, message: "lead deleted"}
       end
-
-      private 
-
-      def find_leadlist
-
-      end
-
+      
     end 
   end
 end

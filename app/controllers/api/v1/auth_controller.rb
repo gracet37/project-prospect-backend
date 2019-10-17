@@ -17,6 +17,8 @@ def create
     end
 end
 
+# LOGIN USER
+
 def login 
     p "******LOGIN********"
     @user = User.find_by(email: params[:email])
@@ -28,9 +30,6 @@ def login
     end
 
 end 
-
-
-
 
 # CHECK IF USER LOGGED IN AND GET CURRENT USER DATA
 

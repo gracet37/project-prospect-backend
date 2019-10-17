@@ -15,31 +15,9 @@ module Api
         render json: list
       end
 
-      # def create
-      #   p "lists ****************************"
-      #   p params
-      #   @list = List.where(name: params[:name], user_id: user_id).first_or_create
-      #   if @list 
-      #     render json: @list, include: [:leads]
-      #   else 
-      #     render json: {errors: @list.errors.full_messages}
-      #   end
-      # end
-
       def create
-        p "*************** LIST CREATE **************" 
-        # p current_user
-        # token = request.headers[:Authorization].split(' ')[1]
-        # p token
-        # decoded_token = JWT.decode(token, 'app_secret', true, { algorithm: 'HS256' })
-    
-        # id = decoded_token.first['id']
-        # p id
-        p params
-        # user = User.find(id)
        @list = List.new(name: params[:name], user_id: params[:user_id])
         if @list.save 
-          # render json: {list: @list, message: "🎉 List Created!"}, include: [:leads]
           render json: @list, include: [:leads]
         else 
           render json: {errors: @list.errors.full_messages}
@@ -56,14 +34,48 @@ module Api
         end
       end
 
+      # def show_special
+      #   p "********SHOW SPECIAL***** "
+      #   p params
+      #   @list = List.find(params[:list_id])
+      #   if @list
+      #     new_list = []
+      #     # @list.each do | list | 
+      #       @list.leads.each do |lead|
+      #         lead.leadnotes.each do |leadnote|
+      #           leadnote_array = []
+      #           if leadnote.user_id == params[:user_id]
+      #             leadnote_array.push(leadnote)
+      #           end
+      #         lead_with_notes = {:lead => lead}
+      #         # lead_with_notes[:leadnotes] = lead.leadnotes
+      #         lead_with_notes[:leadnotes] = leadnote_array
+      #         new_list.push(lead_with_notes)
+      #         # binding.pry
+      #         end
+      #       end
+      #     render json: {list: @list, leads: new_list}
+      #   else 
+      #     render json: {errors: "No list found with that user id"}
+      #   end
+      # end
+
       def show_special
+        p "********SHOW SPECIAL***** "
+        p params
         @list = List.find(params[:id])
         if @list
           new_list = []
           # @list.each do | list | 
             @list.leads.each do |lead|
+              leadnote_array = []
+              lead.leadnotes.each do |leadnote|
+                if leadnote.user_id == params[:user_id]
+                  leadnote_array.push(leadnote)
+                end
+              end
               lead_with_notes = {:lead => lead}
-              lead_with_notes[:leadnotes] = lead.leadnotes
+              lead_with_notes[:leadnotes] = leadnote_array
               new_list.push(lead_with_notes)
             end
           render json: {list: @list, leads: new_list}
@@ -71,25 +83,6 @@ module Api
           render json: {errors: "No list found with that user id"}
         end
       end
-
-      # def show_special_all
-      #   @lists = List.where(user_id: params[:id])
-      #   if @lists
-      #     # binding.pry
-      #     new_list = []
-      #     @lists.each do |list| 
-      #       lead_with_notes = {:list => list}
-      #       list.leads.each do |lead|
-      #         lead_with_notes[:list][:lead] = lead
-      #         lead_with_notes[:list][:lead][:leadnotes] = lead.leadnotes
-      #         new_list.push(lead_with_notes)
-      #       end
-      #     end
-      #     render json: {leads_with_notes: new_list}
-      #   else 
-      #     render json: {errors: "No list found with that id"}
-      #   end
-      # end
 
       def show_special_all
         @lists = List.where(user_id: params[:id])
@@ -110,6 +103,7 @@ module Api
         end
       end
 
+
       def destroy 
         p "******************** DELETE LIST ********************"
         p params
@@ -125,3 +119,37 @@ module Api
     end 
  end
 end
+
+
+
+
+
+
+# def show_special_all
+#   @lists = List.where(user_id: params[:id])
+#   if @lists
+#     # binding.pry
+#     new_list = []
+    
+#     @lists.each do |list| 
+#       list.leads.each do |lead|
+#         lead.leadnotes.each do |leadnote|
+#           leadnote_array = []
+#           if leadnote.user_id == params[:id]
+#             leadnote_array.push(leadnote)
+#           end
+#         end
+#           p "SHOW SPECIAL ALL ********************************"
+        
+#           lead_with_notes = {:lead => lead}
+#           lead_with_notes[:list_id] = list.id
+#           lead_with_notes[:leadnotes] = leadnote_array
+#           new_list.push(lead_with_notes)
+#         end
+#       end
+#     # p leadnotes
+#     render json: {leads_with_notes: new_list}
+#   else 
+#     render json: {errors: "No list found with that id"}
+#   end
+# end

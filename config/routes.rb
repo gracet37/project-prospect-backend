@@ -1,69 +1,39 @@
 Rails.application.routes.draw do
-  resources :comments
-resources :users
-resources :lists
-# resources :leads
-resources :leadlists
-resources :leadnotes
-post '/leadnotes/create', to: 'leadnotes#create'
-get '/leadnotes/:id', to: 'leadnotes#show'
-post '/leadnotes/update', to: 'leadnotes#update'
-root 'welcome#index'
 
-namespace :api do
-  namespace :v1 do
-    resources :categories
-    resources :leads
-    resources :lists
-    post '/lists', to: 'lists#create'
-    post '/lists/:id', to: 'lists#show'
-    post '/auth', to: 'auth#create'
-    post '/login', to: 'auth#login'
-    get '/current_user', to: 'auth#show'
-    get '/lists/show/:id', to: 'lists#show_by_id'
-    get '/lists/show_lists/:id', to: 'lists#show_lists'
-    get '/lists/show_special/:id', to: 'lists#show_special'
-    get '/lists/show_special_all/:id', to: 'lists#show_special_all'
-    # delete '/delete', to '/'
-    resources :leadlists
-    delete '/leadlists', to: 'leadlists#destroy'
-    # resources :leadnotes
-    post '/leadnotes/create', to: 'leadnotes#new'
-    post '/leadnotes/show', to: 'leadnotes#show'
+  resources :users
+  resources :leadnotes
+    post '/leadnotes/create', to: 'leadnotes#create'
+    get '/leadnotes/:id', to: 'leadnotes#show'
+    post '/leadnotes/update', to: 'leadnotes#update'
+  root 'welcome#index'
 
-    resources :comments
+  #  AL API/V ROUTES
+
+  namespace :api do
+    namespace :v1 do
+      # LEADS ROUTES
+      resources :leads
+
+      #  LIST ROUTES
+      resources :lists
+      post '/lists', to: 'lists#create'
+      get '/lists/show_lists/:id', to: 'lists#show_lists'
+      # get 'lists/show_special/:id', to: 'lists#show_special'
+      post '/lists/show_special', to: 'lists#show_special'
+      get '/lists/show_special_all/:id', to: 'lists#show_special_all'
+
+      #  AUTH ROUTES
+      post '/auth', to: 'auth#create'
+      post '/login', to: 'auth#login'
+      get '/current_user', to: 'auth#show'
+
+      #  LEADLIST ROUTES
+      resources :leadlists
+      delete '/leadlists', to: 'leadlists#destroy'
+      # post '/leadnotes/create', to: 'leadnotes#new'
+      # post '/leadnotes/show', to: 'leadnotes#show'
+
+    end
   end
-end
-# get '/search', to: 'leads#search'
-# post '/search', to: 'leads#search'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-# root 'welcome#index'
 
-# # LOGIN LOGOUT ROUTES
-# post '/login', to: 'auth#create'
-# delete '/logout', to: 'auth#destroy'
-
-# # NEW USER SET UP
-# post '/newuser', to: 'users#create'
-
-# # YELP SEARCH
-# post '/search', to: 'leads#search'
-
-# # LIST POST
-# post '/newlist', to: 'lists#create'
-
-# # LEADS POST
-# post '/newlead', to: 'leads#create'
-
-# # LEADSLIST POST
-# post '/newleadlist', to: 'leadlists#create'
-
-# # LEADNOTES POST 
-# post '/newleadnote', to: 'leadnotes#create'
-
-# #ALL CATEGORIES
-get '/categories', to: 'categories#index'
-
-# #edit user details
-# get '/users/:id/edit', to: 'users#update'
 end

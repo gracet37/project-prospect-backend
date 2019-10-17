@@ -12,17 +12,17 @@ module Api
         p "******************* CREATE LEADS ********************"
         # p params 
         p params
-        p params[:leadsArray]
+        p params[:selected]
         p "leads array 0 value (FIRST USER EMAIL ADDRESS)"
-        p params[:leadsArray][0][:value]
+        p params[:selected][0]
         p "lead company (COMPANY NAME)"
-        p params[:lead][:company]
+        p params[:company]
         p "lead website (WEBSITE)"
-        p params[:lead][:website]
-        data = params[:leadsArray]
+        p params[:website]
+        data = params[:selected]
         lead_array = []
         data.each { |lead| 
-            new_lead = Lead.find_or_create_by(first_name: lead[:name], last_name: lead[:last_name], email: lead[:email], position:lead[:position], confidence_score: lead[:confidence], company: params[:lead][:company], website: params[:lead][:website])
+            new_lead = Lead.find_or_create_by(first_name: lead[:name], last_name: lead[:last_name], email: lead[:email], position:lead[:position], confidence_score: lead[:confidence], company: params[:company], website: params[:website])
             lead_array.push(new_lead)
         }
         if lead_array
