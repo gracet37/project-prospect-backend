@@ -103,7 +103,6 @@ module Api
         end
       end
 
-
       def destroy 
         p "******************** DELETE LIST ********************"
         p params
