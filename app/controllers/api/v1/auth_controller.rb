@@ -13,9 +13,11 @@ def create
       # render json: { id: user.id, first_name: user.first_name, last_name: user.last_name, email: user.email, token: token}
             render json: { user: user, token: token}
     else
-      render json: { error: 'Not Authorized'}, status: 401
+      render json: {error: user.errors.full_messages}
     end
 end
+
+# LOGIN USER
 
 def login 
     p "******LOGIN********"
@@ -28,9 +30,6 @@ def login
     end
 
 end 
-
-
-
 
 # CHECK IF USER LOGGED IN AND GET CURRENT USER DATA
 
